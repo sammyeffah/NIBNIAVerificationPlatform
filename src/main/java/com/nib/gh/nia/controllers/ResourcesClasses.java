@@ -56,16 +56,18 @@ public class ResourcesClasses {
     }
 
     @GetMapping("/verify-data")
-    public String getVerifyDataByGuid(@RequestParam("shortGuid") String shortGuid) {
+    public String getVerifyDataByGuid(@RequestParam("shortGuid") String shortGuid, @RequestParam("reason") String reason) {
         String verificationDatas = null;
         try {
             String responseReceived = new DoRequest()
-                    .sendGet(verifyURL.replace("#ACTION#", "by_guid&guid=" + shortGuid));
+                    .sendGet(verifyURL.replace("#ACTION#", "by_guid&guid=" + shortGuid + "&reason=" + reason));
             logger.info("DATA:: " + responseReceived);
             if (responseReceived != null) {
                 JSONObject respJSON = new JSONObject(responseReceived);
                 if (respJSON.optString("code").equals("00")) {
-                    verificationDatas = respJSON.optJSONArray("data").length()>0?respJSON.optJSONArray("data").optJSONObject(0).toString():"";
+                    verificationDatas = respJSON.optJSONArray("data").length() > 0
+                            ? respJSON.optJSONArray("data").optJSONObject(0).toString()
+                            : "";
                     logger.info("ACTUAL DATA:: " + verificationDatas);
                 } else {
                     return null;
@@ -105,6 +107,7 @@ public class ResourcesClasses {
             verificationData.setCardValidFrom(jsonObject.optString("cardValidFrom", ""));
             verificationData.setCardValidTo(jsonObject.optString("cardValidTo", ""));
             verificationData.setCardId(jsonObject.optString("cardId", ""));
+            verificationData.setReason(jsonObject.optString("reason", ""));
 
             verificationDataList.add(verificationData);
         }
@@ -133,6 +136,17 @@ public class ResourcesClasses {
                     "    \"status\": \"00\",\r\n" + //
                     "    \"message\": \"Failed\"\r\n" + //
                     "}";
+    }
+
+    @PostMapping("/update-user")
+    public ResponseData editUsers(@RequestBody UserDTO user) {
+        logger.info("REQUEST:: " + user);
+        String respMsg = userService.updateUser(user);
+        logger.info("RESPONSE:: " + respMsg);
+        if (respMsg.split("#")[0].equals("00"))
+            return new ResponseData("00", "Updated successfully");
+        else
+            return new ResponseData("06", "Failed");
 
     }
 

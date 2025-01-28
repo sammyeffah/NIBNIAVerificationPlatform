@@ -19,4 +19,5 @@ public class VerificationData {
     private String cardId;
     private String cardValidFrom;
     private String cardValidTo;
+    private String reason;
 }

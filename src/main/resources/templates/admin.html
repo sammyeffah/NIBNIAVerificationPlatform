@@ -60,7 +60,7 @@
 							</div>
 
 						</div>
-				
+
 
 						<div id="add-user-modal" class="modal fade" tabindex="-1" role="dialog"
 							aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
@@ -103,8 +103,8 @@
 													<div class="mb-3">
 														<label for="role" class="control-label">Role
 														</label> <select class="form-select" id="role" name="role">
-															<option value="1">User</option>
-															<option value="2">Admin</option>
+															<option value="2">User</option>
+															<option value="1">Admin</option>
 														</select>
 													</div>
 												</div>
@@ -160,7 +160,95 @@
 
 						</div>
 						<!-- Modal -->
+						<div class="modal fade" id="edit-user-modal" tabindex="-1" role="dialog"
+							aria-labelledby="editModalLabel" aria-hidden="true">
+							<div class="modal-dialog" role="document">
+								<div class="modal-content">
+									<div class="modal-header">
+										<h5 class="modal-title" id="editModalLabel">Edit User</h5>
 
+									</div>
+									<div class="modal-body">
+										<div class="row">
+											<input type="text" class="form-control" name="id" id="id"
+												style="display:none;">
+											<div class="col-md-12">
+												<div class="mb-3">
+													<label for="firstNameEdit" class="control-label">
+														First Name</label>
+													<input type="text" class="form-control" name="firstNameEdit"
+														id="firstNameEdit">
+												</div>
+											</div>
+
+										</div>
+
+										<div class="row">
+											<div class="col-md-12">
+												<div class="mb-3">
+													<label for="lastNameEdit" class="control-label">Last Name
+													</label> <input type="text" class="form-control" name="lastNameEdit"
+														id="lastNameEdit">
+												</div>
+											</div>
+										</div>
+
+
+										<div class="row">
+											<div class="col-md-6">
+												<div class="mb-3">
+													<label for="roleEdit" class="control-label">Role
+													</label> <select class="form-select" id="roleEdit" name="roleEdit">
+														<option value="2">User</option>
+														<option value="1">Admin</option>
+													</select>
+												</div>
+											</div>
+											<div class="col-md-6">
+												<div class="mb-3">
+													<label for="usernameEdit" class="control-label">Username
+													</label> <input type="text" class="form-control" name="usernameEdit"
+														id="usernameEdit">
+												</div>
+											</div>
+										</div>
+
+										<div class="row">
+
+
+											<div class="col-md-6">
+
+												<div class="mb-3">
+
+													<label for="phoneNumberEdit" class="control-label">Phone
+													</label> <input type="tel" class="form-control"
+														name="phoneNumberEdit" id="phoneNumberEdit">
+
+												</div>
+
+											</div>
+											<div class="col-md-6">
+
+												<div class="mb-3">
+
+													<label for="emailEdit" class="control-label">Email</label> <input
+														type="email" class="form-control" name="emailEdit"
+														id="emailEdit">
+
+												</div>
+
+											</div>
+										</div>
+									</div>
+									<div class="modal-footer">
+										<button id="btnEdit" type="submit" onclick="editUser(this)"
+											class="btn btn-primary ">Update User</button>
+										<button type="button" class="btn btn-default waves-effect"
+											data-bs-dismiss="modal">Close</button>
+									</div>
+								</div>
+							</div>
+						</div>
 
 					</div>
 					<!-- /.modal -->
@@ -355,29 +443,25 @@
 												if (data.roles.name != "ADMIN") {
 													if (data.enabled === true) {
 														return "<button class='btn btn-warning btn-sm warning' style='background-color:#ffA500' onclick='triggerDisableDialogue(this)'>" +
-															"<span style='color:#ffffff'>Disable</span></button>" + "<button class='btn btn-default btn-sm save' style='background-color:#f44336' onclick='triggerDeleteDialogue(this)'>" +
+															"<span style='color:#ffffff'>Disable</span></button>" +
+															"<button class='btn btn-prmary btn-sm save' style='background-color:#00008b' onclick='triggerEditModal(this)'>" +
+															"<span style='color:#ffffff'>Edit</span></button>" +
+															"<button class='btn btn-default btn-sm save' style='background-color:#f44336' onclick='triggerDeleteDialogue(this)'>" +
 															"<span style='color:#ffffff'>Delete</span></button>";
 													} else {
 														return "<button class='btn btn-default btn-sm update' style='background-color:#5eba7d' onclick='triggerEnableDialogue(this)'>" +
 															"<span style='color:#ffffff'>Enable</span></button>" +
+															"<button class='btn btn-prmary btn-sm save' style='background-color:#00008b' onclick='triggerEditModal(this)'>" +
+															"<span style='color:#ffffff'>Edit</span></button>" +
 															"<button class='btn btn-default btn-sm save' style='background-color:#f44336' onclick='triggerDeleteDialogue(this)'>" +
 															"<span style='color:#ffffff'>Delete</span></button>";
 													}
+												}else{
+													return "<button class='btn btn-prmary btn-sm save' style='background-color:#00008b' onclick='triggerEditModal(this)'>" +
+															"<span style='color:#ffffff'>Edit</span></button>";
 												}
 											}
 										},
-
-										// {
-										// 	targets: [4],
-										// 	"render": function (
-										// 		data) {
-										// 		return moment(
-										// 			data)
-										// 			.format(
-										// 				"DD/MM/YYYY HH:mm:ss")
-										// 	},
-										// },
-
 									]
 
 								});
@@ -420,7 +504,7 @@
 				lastName: lastName,
 				phoneNumber: phoneNumber,
 				email: email,
-				role: roleList,
+				role: roleList[0],
 				username: username
 			};
 
@@ -431,10 +515,10 @@
 					method: "POST",
 					data: JSON.stringify(UsersObj),
 					headers: {
-                     'X-CSRF-TOKEN': csrfToken
-                    },
+						'X-CSRF-TOKEN': csrfToken
+					},
 					contentType: 'application/json'
-					
+
 				}).done(function (data) {
 					const jsonObject = JSON.parse(data);
 					$("#loading").hide();
@@ -462,12 +546,64 @@
 
 		}
 
+		function editUser(e) {
+			// e.preventDefault(); 
+			$("#loading").show();
+
+			var id = $("#id").val();
+			var firstName = $("#firstNameEdit").val();
+			var roleList = [$("#roleEdit").val()];
+			var lastName = $("#lastNameEdit").val();
+			var phoneNumber = $("#phoneNumberEdit").val();
+			var email = $("#emailEdit").val();
+			var username = $("#usernameEdit").val();
+			console.log("ROLE::: " + roleList[0])
+			if (id != "" && email != "" && phoneNumber != "") {
+				console.log("ID::: " + id)
+				var UsersObj = {
+					id: id,
+					firstName: firstName,
+					lastName: lastName,
+					phoneNumber: phoneNumber,
+					email: email,
+					role: roleList[0],
+					username: username
+				};
+
+				$.ajax({
+					url: "[[@{/nib/api/nia/update-user}]]",
+					method: "POST",
+					data: JSON.stringify(UsersObj),
+					contentType: 'application/json'
+				}).done(function (data) {
+
+					$("#loading").hide();
+					if (data.status == "00") {
+						swal({
+							title: "Success!",
+							text: "User data added successfully!",
+							icon: "success",
+							button: "Ok"
+						});
+					} else {
+						swal({
+							title: "Error!",
+							text: "There was an error adding data.",
+							icon: "error",
+							button: "Ok"
+						});
+					}
+					$('#edit-user-modal').modal('hide');
+					getUserList();
+
+				}).fail(function (jqXHR, textStatus, errorThrown) {
+					console.error("Error occurred: " + textStatus, errorThrown);
+					swal("An error occurred while fetching data", "Error");
+				});
+			}
+
+		}
 	</script>
-
-
-	
-
-
 
 	<script>
 
@@ -556,6 +692,32 @@
 			});
 		}
 
+		function triggerEditModal(e) {
+			// Optionally, you can retrieve data from the button's row to populate the modal
+			var row = $(e).closest('tr')[0];
+
+			var id = $(row).find('td:eq(0)').text();
+			var firstName = $(row).find('td:eq(1)').text();
+			var lastName = $(row).find('td:eq(2)').text();
+			var phoneNumber = $(row).find('td:eq(3)').text();
+			var email = $(row).find('td:eq(5)').text();
+			var username = $(row).find('td:eq(6)').text();
+			var role = $(row).find('td:eq(8)').text();
+
+			console.log("ID EDIT:: " + id)
+
+			$('#id').val(id);
+			$('#firstNameEdit').val(firstName); // Assuming input field has ID 'editFirstName'
+			$('#lastNameEdit').val(lastName);
+			$('#phoneNumberEdit').val(phoneNumber);
+			$('#emailEdit').val(email);
+			$('#usernameEdit').val(username);
+			$('#roleEdit').val(role);
+
+
+			// Open the modal
+			$('#edit-user-modal').modal('show');
+		}
 
 		function triggerDisableDialogue(e) {
 			// e.preventDefault(); 
