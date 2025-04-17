@@ -56,19 +56,19 @@ public class ResourcesClasses {
     }
 
     @GetMapping("/verify-data")
-    public String getVerifyDataByGuid(@RequestParam("shortGuid") String shortGuid, @RequestParam("reason") String reason) {
+    public String getVerifyDataByGuid(@RequestParam("shortGuid") String shortGuid) {
         String verificationDatas = null;
         try {
             String responseReceived = new DoRequest()
-                    .sendGet(verifyURL.replace("#ACTION#", "by_guid&guid=" + shortGuid + "&reason=" + reason));
-            logger.info("DATA:: " + responseReceived);
+                    .sendGet(verifyURL.replace("#ACTION#", "by_guid&guid=" + shortGuid));
+            // logger.info("DATA:: " + responseReceived);
             if (responseReceived != null) {
                 JSONObject respJSON = new JSONObject(responseReceived);
                 if (respJSON.optString("code").equals("00")) {
                     verificationDatas = respJSON.optJSONArray("data").length() > 0
                             ? respJSON.optJSONArray("data").optJSONObject(0).toString()
                             : "";
-                    logger.info("ACTUAL DATA:: " + verificationDatas);
+                    // logger.info("ACTUAL DATA:: " + verificationDatas);
                 } else {
                     return null;
                 }
