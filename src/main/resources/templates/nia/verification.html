@@ -61,109 +61,6 @@
                 <div class="container">
                     <input id="loggedInUser" th:value="${username}" type="hidden">
                     <!-- Page-Title -->
-                    <div class="row">
-
-                        <div class="col-md-4"></div>
-
-                        <div class="col-md-8">
-
-                            <!-- <h4 class="pull-left page-title">Tasks</h4> -->
-                            <div class="pull-left page-title">
-                                <button class="btn btn-primary btn-lg waves-effect waves-light "
-                                    data-bs-target="#spool-data-modal" data-bs-toggle="modal">
-                                    NIA Verification Data<i class="fa fa-plus"></i>
-                                </button>
-                            </div>
-
-                        </div>
-
-                        <div aria-hidden="true" aria-labelledby="myModalLabel" class="modal fade" id="spool-data-modal"
-                            role="dialog" style="display: none;" tabindex="-1">
-                            <div class="modal-dialog" style="width: 30%;">
-                                <div class="modal-content">
-
-                                    <form action="#" id="verify-data-form" method="" novalidate>
-
-                                        <div class="modal-header">
-                                            <button aria-hidden="true" class="close" data-bs-dismiss="modal"
-                                                type="button">×
-                                            </button>
-                                            <h4 class="modal-title">Verify with Short Guid</h4>
-                                        </div>
-                                        <div class="modal-body">
-                                            <div class="row">
-                                                <div class="col-md-12">
-                                                    <div class="mb-3">
-                                                        <label class="control-label" for="shortGuid">Short Guid</label>
-                                                        <input class="form-control" id="shortGuid" name="shortGuid"
-                                                            type="text">
-                                                    </div>
-                                                </div>
-
-                                            </div>
-
-                                            <div class="row">
-                                                <div class="col-md-12">
-                                                    <div class="mb-3">
-                                                        <label for="reason" class="control-label">Reason
-                                                        </label> <select class="form-select" id="reason" name="reason">
-                                                            <option value="Remmittance">Remmittance</option>
-                                                            <option value="Payment">Payment</option>
-                                                            <option value="Account_Opening">Account Opening</option>
-                                                            <option value="Withdrawal">Withdrawal</option>
-                                                            <option value="Deposit">Deposit</option>
-                                                            <option value="Others">Others</option>
-                                                            <option value="Test">Test</option>
-                                                        </select>
-                                                    </div>
-                                                </div>
-
-                                            </div>
-                                        </div>
-
-
-                                        <div class="modal-footer">
-                                            <!-- <button type="button" class="btn btn-info waves-effect waves-light"
-                                            id="add-textbox-btn">Include
-                                            Items</button> -->
-
-                                            <button class="btn btn-primary " id="btnCollectionAdd"
-                                                onclick="fetchVerificationDataByShortGuid(this)" type="submit">Spool
-                                                Data
-                                            </button>
-                                            <button class="btn btn-primary waves-effect waves-light"
-                                                data-bs-dismiss="modal" type="button">Close
-                                            </button>
-                                        </div>
-
-                                    </form>
-                                </div>
-                            </div>
-
-                        </div>
-                        <!-- Modal End-->
-
-                        <!-- Another Modal for display -->
-                        <!-- Modal structure already in the HTML -->
-                        <div aria-hidden="true" aria-labelledby="verifyModalCenterTitle" class="modal fade"
-                            id="display-verify-details" role="dialog" tabindex="-1">
-                            <div class="modal-dialog modal-dialog-centered" role="document">
-                                <div class="modal-content">
-                                    <div class="modal-header">
-                                        <h4 class="modal-title" id="verifyModalTitle">Verified Details</h4>
-                                    </div>
-                                    <div class="modal-body" id="modal-body-content">
-                                        <!-- Dynamic content will go here -->
-                                    </div>
-                                    <div class="modal-footer">
-                                        <button class="btn btn-secondary" data-bs-dismiss="modal"
-                                            type="button">OK</button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                    </div>
 
                     <div id="loading" style="display: none"></div>
 
@@ -191,7 +88,7 @@
         <div class="row">
             <div class="col-md-12">
 
-                <div class="card card-default">
+                <!-- <div class="card card-default">
                     <div class="card-header">
                         <h3 class="card-title">NIA Verification Data</h3>
                     </div>
@@ -237,6 +134,96 @@
                             </div>
                         </div>
                     </div>
+                </div> -->
+
+
+                <div class="row">
+
+                    <div class="col-md-4"></div>
+
+                    <div class="col-md-8">
+
+                        <!-- <h4 class="pull-left page-title">Tasks</h4> -->
+                        <div class="pull-left page-title">
+                            <button class="btn btn-primary btn-lg waves-effect waves-light "
+                                data-bs-target="#spool-data-modal" data-bs-toggle="modal">
+                                NIA Verification Data<i class="fa fa-plus"></i>
+                            </button>
+                        </div>
+
+                    </div>
+
+                    <div aria-hidden="true" aria-labelledby="myModalLabel" class="modal fade" id="spool-data-modal"
+                        role="dialog" style="display: none;" tabindex="-1">
+                        <div class="modal-dialog" style="width: 30%;">
+                            <div class="modal-content">
+
+                                <form action="#" id="verify-data-form" method="" novalidate>
+
+                                    <div class="modal-header">
+                                        <button aria-hidden="true" class="close" data-bs-dismiss="modal" type="button">×
+                                        </button>
+                                        <h4 class="modal-title">Verify with Short Guid</h4>
+                                    </div>
+                                    <div class="modal-body">
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                <div class="mb-3">
+                                                    <label class="control-label" for="shortGuid">Short GUID</label>
+                                                    <input class="form-control" id="shortGuid" name="shortGuid"
+                                                        type="text">
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                    </div>
+
+
+                                    <div class="modal-footer">
+                                        <!-- <button type="button" class="btn btn-info waves-effect waves-light"
+                                        id="add-textbox-btn">Include
+                                        Items</button> -->
+
+                                        <button class="btn btn-primary " id="btnCollectionAdd"
+                                            onclick="fetchVerificationDataByShortGuid(this)" type="submit">Spool
+                                            Verification
+                                            Data
+                                        </button>
+                                        <button class="btn btn-primary waves-effect waves-light" data-bs-dismiss="modal"
+                                            type="button">Close
+                                        </button>
+                                    </div>
+
+                                </form>
+                            </div>
+                        </div>
+
+                    </div>
+                    <!-- Modal End-->
+
+                    <!-- Another Modal for display -->
+                    <!-- Modal structure already in the HTML -->
+                    <div aria-hidden="true" aria-labelledby="verifyModalCenterTitle" class="modal fade"
+                        id="display-verify-details" role="dialog" tabindex="-1">
+                        <div class="modal-dialog modal-dialog-centered" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h4 class="modal-title" id="verifyModalTitle">Verified Details</h4>
+                                </div>
+                                <div class="modal-body">
+                                    <div class="row">
+                                        <div class="col-md-9" id="modal-body-content"></div>
+                                        <div class="col-md-3" id="modal-body-photo"></div>
+                                    </div>
+                                    <!-- Dynamic content will go here -->
+                                </div>
+                                <div class="modal-footer">
+                                    <button class="btn btn-secondary" data-bs-dismiss="modal" type="button">OK</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
                 </div>
             </div>
 
@@ -276,7 +263,7 @@
     <script th:src="@{https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js}"></script>
     <script th:src="@{https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js}"></script>
 
-    <script>
+    <!-- <script>
 
         $('#loading-spinner').show();
         getVerificationDataList();
@@ -406,7 +393,7 @@
             // Return formatted date
             return `${year}-${month}-${day} ${hours}:${minutes}:${seconds}`;
         }
-    </script>
+    </script> -->
 
     <script>
         // Attach the submit event to the form
@@ -417,14 +404,14 @@
 
         function fetchVerificationDataByShortGuid(e) {
             var shortGuid = $("#shortGuid").val();
-            var reason = $('#reason').val();
+            // var reason = $('#reason').val();
 
             $.ajax({
-                url: "/nib/api/nia/verify-data?shortGuid=" + shortGuid + "&reason=" + reason, // Adjust your URL
+                url: "/nib/api/nia/verify-data?shortGuid=" + shortGuid, // Adjust your URL
                 method: "GET",
                 contentType: 'application/json'
             }).done(function (data) {
-                console.log("DATA RECEIVED:: " + data);
+                // console.log("DATA RECEIVED:: " + data);
                 $('#spool-data-modal').modal('hide');
 
                 if (data && data !== "") {
@@ -441,8 +428,32 @@
                     <h6>Request Time: ${jsonObject.requestTime}</h6>
                     <h6>Response Time: ${jsonObject.responseTime}</h6>
                     <h6>Digital Address: ${jsonObject.digitalAddress ? jsonObject.digitalAddress : jsonObject.otherDigitalAddress}</h6>
+                    <h6>Reason: ${jsonObject.reason == null ? 'N/A' : jsonObject.reason}</h6>
                 `;
+
+                    const biometricFeedObject = JSON.parse(jsonObject.biometricFeed);
+                    const imageData = biometricFeedObject.face.data;
+                    const imageType = biometricFeedObject.face.dataType;
+
+                    const byteCharacters = atob(imageData);
+                    const byteNumbers = new Array(byteCharacters.length);
+                    for (let i = 0; i < byteCharacters.length; i++) {
+                        byteNumbers[i] = byteCharacters.charCodeAt(i);
+                    }
+                    const byteArray = new Uint8Array(byteNumbers);
+
+                    // Create a Blob from the binary data
+                    const blob = new Blob([byteArray], { type: 'image/' + imageType });
+
+                    // Generate a Blob URL
+                    const imageUrl = URL.createObjectURL(blob);
+
+
+                    console.log("Image Data: ", imageUrl);
+
+
                     $('#modal-body-content').html(modalContent);
+                    $('#modal-body-photo').html(`<img src="${imageUrl}" alt="Photo" style="width: 100%; height: auto;">`);
                     $('#display-verify-details').modal('show');
                 } else {
 
