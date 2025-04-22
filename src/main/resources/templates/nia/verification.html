@@ -457,7 +457,20 @@
                     $('#display-verify-details').modal('show');
                 } else {
 
-                    swal("Data not found for " + shortGuid, "Error");
+                    // swal("Data not found for " + shortGuid, "Error");
+
+                    swal({
+                        title: "Data not found for " + shortGuid,
+                        text: "Error",
+                        icon: "error", // You might want to include an error icon
+                        button: "OK", // Optional: Customize the button text
+                    })
+                        .then((value) => {
+                            // This function will run when the user clicks "OK"
+                            if (value) { // Check if the user clicked OK (value will be true)
+                                location.reload();
+                            }
+                        });
                 }
 
                 $('#display-verify-details').on('hidden.bs.modal', function () {
